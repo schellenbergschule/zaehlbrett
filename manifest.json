@@ -1,0 +1,23 @@
+{
+  "name": "Zählbrett",
+  "short_name": "Zählbrett",
+  "description": "Punkte zählen und Ranglisten verwalten",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0d16",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
