@@ -661,15 +661,15 @@
 
 </style>
 
-manifest.json
+<link rel="manifest" href="manifest.json">
 
 <meta name="theme-color" content="#8b5cf6">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-icons/icon-192.png
-icons/icon-512.png
+icon-192.png
+icon-512.png
 
 </head>
 
@@ -1160,5 +1160,19 @@ icons/icon-512.png
 })();
 </script>
 
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("./service-worker.js")
+      .then(function (registration) {
+        console.log("Service Worker registriert:", registration);
+      })
+      .catch(function (error) {
+        console.error("Service Worker konnte nicht registriert werden:", error);
+      });
+  });
+}
+</script>
+  
 </body>
 </html>
