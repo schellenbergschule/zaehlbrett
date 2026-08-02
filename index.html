@@ -206,6 +206,7 @@
     text-align:center;
     font-size:.9rem;
     flex-shrink:0;
+    align-self:center;
   }
   .name-row input[type="text"]{
     flex:1;
@@ -316,7 +317,7 @@
     align-items:center;
     justify-content:space-between;
     gap:12px;
-    margin-bottom:26px;
+    margin-bottom:14px;
     flex-wrap:wrap;
   }
   .game-top h1{
@@ -331,12 +332,7 @@
   }
 
   .podium{
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-    gap:16px;
-    margin-bottom:36px;
-    min-height:190px;
+    display:none !important;
   }
   .podium-slot{
     display:flex;
@@ -401,11 +397,13 @@
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    min-width:32px;height:32px;
-    border-radius:10px;
+    min-width:clamp(22px, 3vw, 32px);
+    width:clamp(22px, 3vw, 32px);
+    height:clamp(22px, 3vw, 32px);
+    border-radius:clamp(7px, 1vw, 10px);
     font-family:'Space Grotesk', sans-serif;
     font-weight:700;
-    font-size:.88rem;
+    font-size:clamp(.68rem, 1.2vw, .88rem);
     color:var(--text-hi);
     background:var(--glass-strong);
     border:1px solid var(--border);
@@ -417,16 +415,18 @@
 
   .cards-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
-    gap:20px;
+    grid-template-columns:repeat(var(--player-count, 4), minmax(0, 1fr));
+    gap:clamp(5px, 1.2vw, 16px);
     margin-bottom:30px;
+    width:100%;
   }
 
   .player-card{
     background:var(--glass);
     border:1px solid var(--border);
-    border-radius:18px;
-    padding:20px 18px 18px;
+    border-radius:clamp(12px, 1.6vw, 18px);
+    padding:clamp(10px, 1.6vw, 20px) clamp(7px, 1.4vw, 18px) clamp(10px, 1.4vw, 18px);
+    min-width:0;
     position:relative;
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
@@ -459,63 +459,50 @@
 
   .player-card .card-head{
     display:flex;
-    align-items:center;
-    gap:10px;
+    flex-direction:column;
+    align-items:stretch;
+    gap:clamp(4px, .7vw, 8px);
     margin-bottom:8px;
+    min-width:0;
     position:relative;
     z-index:1;
   }
   .player-card .name-field{
-    flex:1;
+    flex:1 1 auto;
+    width:100%;
     font-weight:600;
-    font-size:1.02rem;
+    font-size:clamp(.72rem, 1.35vw, 1.02rem);
     color:var(--text-hi);
     border:none;
-    background:transparent;
+    background:rgba(255,255,255,.035);
     border-bottom:1px dashed transparent;
-    padding:3px 2px;
+    border-radius:8px;
+    padding:clamp(4px, .8vw, 7px) clamp(4px, .8vw, 8px);
     outline:none;
     min-width:0;
     font-family:'Inter', sans-serif;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    cursor:text;
+    text-align:center;
+  }
+  .player-card .name-field:hover{
+    background:rgba(255,255,255,.055);
+    border-bottom-color:rgba(255,255,255,.18);
   }
   .player-card .name-field:focus{
+    background:rgba(139,92,246,.10);
     border-bottom:1px dashed var(--accent-a);
-  }
-  .player-card .name-field[readonly]{
-    cursor:default;
-    color:var(--text-hi);
-  }
-  .edit-card-btn{
-    flex-shrink:0;
-    border:1px solid var(--border);
-    background:rgba(255,255,255,.04);
-    color:var(--text-mid);
-    border-radius:8px;
-    padding:6px 8px;
-    font-family:'Inter', sans-serif;
-    font-size:.72rem;
-    font-weight:600;
-    cursor:pointer;
-    transition:border-color .15s ease, color .15s ease, background .15s ease;
-  }
-  .edit-card-btn:hover,
-  .edit-card-btn:focus-visible{
-    border-color:var(--accent-a);
-    color:var(--text-hi);
-    outline:none;
-  }
-  .edit-card-btn.active{
-    color:#fff;
-    border-color:transparent;
-    background:linear-gradient(120deg, var(--accent-a), var(--accent-b));
+    white-space:normal;
   }
 
   .player-card .total{
     font-family:'JetBrains Mono', monospace;
-    font-size:2.4rem;
+    font-size:clamp(1.05rem, 3.2vw, 2.4rem);
     font-weight:700;
     text-align:center;
-    margin: 10px 0 16px;
+    margin: clamp(6px, 1vw, 10px) 0 clamp(8px, 1.4vw, 16px);
     line-height:1;
     position:relative;
     z-index:1;
@@ -527,9 +514,9 @@
   .player-card .total .lbl{
     display:block;
     font-family:'Inter', sans-serif;
-    font-size:.66rem;
+    font-size:clamp(.48rem, .9vw, .66rem);
     font-weight:600;
-    letter-spacing:.14em;
+    letter-spacing:clamp(.04em, .3vw, .14em);
     text-transform:uppercase;
     color:var(--text-lo);
     margin-top:6px;
@@ -540,7 +527,7 @@
   .rounds-list{
     display:flex;
     flex-direction:column;
-    gap:7px;
+    gap:clamp(4px, .7vw, 7px);
     max-height:260px;
     overflow-y:auto;
     padding-right:2px;
@@ -550,29 +537,27 @@
   .round-row{
     display:flex;
     align-items:center;
-    gap:8px;
+    gap:0;
+    min-width:0;
     border-top:1px solid var(--border);
     padding-top:7px;
   }
   .round-row .r-label{
-    font-size:.76rem;
-    color:var(--text-lo);
-    width:56px;
-    flex-shrink:0;
-    font-weight:500;
+    display:none;
   }
   .round-row input[type="number"]{
-    flex:1;
+    flex:1 1 auto;
     width:100%;
+    min-width:0;
     border:1px solid var(--border);
     background:rgba(255,255,255,.04);
     border-radius:8px;
-    padding:7px 9px;
+    padding:clamp(4px, .75vw, 7px) clamp(4px, .8vw, 9px);
     font-family:'JetBrains Mono', monospace;
-    font-size:.92rem;
+    font-size:clamp(.7rem, 1.25vw, .92rem);
     font-weight:500;
     color:var(--text-hi);
-    text-align:right;
+    text-align:center;
     outline:none;
     transition:border-color .15s ease, background .15s ease;
   }
@@ -608,7 +593,7 @@
     text-align:center;
     color:var(--text-lo);
     font-size:.88rem;
-    margin: -16px 0 24px;
+    margin: 4px 0 18px;
   }
 
   .modal-overlay{
@@ -654,11 +639,12 @@
   }
 
   @media (max-width:480px){
+    body{ padding-left:8px; padding-right:8px; }
     .podium{ gap:10px; }
     .podium-slot{ width:98px; }
+    .cards-grid{ gap:4px; }
+    .player-card:hover{ transform:none; }
   }
-</style>
-
 </style>
 
 <link rel="manifest" href="manifest.json">
@@ -672,9 +658,6 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 
-</head>
-
-  
 </head>
 <body>
 
@@ -860,8 +843,7 @@
       id: "p" + i + "_" + Date.now(),
       name: nm.trim() === "" ? ("Spieler " + (i+1)) : nm.trim(),
       scores: [],
-      grad: PLAYER_GRADIENTS[i % PLAYER_GRADIENTS.length],
-      editing: false
+      grad: PLAYER_GRADIENTS[i % PLAYER_GRADIENTS.length]
     }));
     roundCount = 0;
     document.getElementById("setup-screen").style.display = "none";
@@ -902,50 +884,7 @@
   }
 
   function renderPodium(){
-    podiumEl.innerHTML = "";
-    const showMedals = players.length > 3;
-    const ranked = getRankedOrder();
-    const top = ranked.slice(0, Math.min(3, ranked.length));
-
-    if(top.length === 0) return;
-
-    if(!showMedals){
-      podiumEl.style.display = "none";
-      return;
-    }
-    podiumEl.style.display = "flex";
-
-    const order = [];
-    if(top[1]) order.push({p: top[1], rank:2});
-    order.push({p: top[0], rank:1});
-    if(top[2]) order.push({p: top[2], rank:3});
-
-    order.forEach(({p, rank}) => {
-      const slot = document.createElement("div");
-      slot.className = "podium-slot rank" + rank;
-
-      const medal = document.createElement("div");
-      medal.className = "medal " + (rank===1?"gold":rank===2?"silver":"bronze");
-      medal.textContent = rank;
-      slot.appendChild(medal);
-
-      const nameEl = document.createElement("div");
-      nameEl.className = "p-name";
-      nameEl.textContent = p.name;
-      slot.appendChild(nameEl);
-
-      const scoreEl = document.createElement("div");
-      scoreEl.className = "p-score";
-      scoreEl.textContent = totalFor(p);
-      slot.appendChild(scoreEl);
-
-      const stand = document.createElement("div");
-      stand.className = "stand";
-      stand.textContent = rank;
-      slot.appendChild(stand);
-
-      podiumEl.appendChild(slot);
-    });
+    // Podest in v007 bewusst entfernt: Rang wird direkt auf jeder Spielerkarte angezeigt.
   }
 
   function focusRoundInput(playerIndex, roundIndex){
@@ -965,13 +904,13 @@
     roundCount++;
     players.forEach(p => {
       p.scores[roundCount-1] = 0;
-      p.editing = false;
     });
     renderGame();
     focusRoundInput(0, roundCount-1);
   }
 
   function renderCards(){
+    cardsGridEl.style.setProperty("--player-count", Math.max(1, players.length));
     cardsGridEl.innerHTML = "";
     const ranks = computeRanks();
     const showMedalBadge = players.length > 3;
@@ -998,42 +937,28 @@
       nameInput.type = "text";
       nameInput.className = "name-field";
       nameInput.value = player.name;
-      nameInput.readOnly = !player.editing;
-      nameInput.tabIndex = player.editing ? 0 : -1;
-      nameInput.setAttribute("aria-label", "Name von " + player.name);
+      nameInput.readOnly = false;
+      nameInput.tabIndex = 0;
+      nameInput.title = player.name;
+      nameInput.setAttribute("aria-label", "Name von " + player.name + " bearbeiten");
       nameInput.addEventListener("input", (e) => {
         player.name = e.target.value;
+        nameInput.title = player.name;
         renderPodium();
       });
+      nameInput.addEventListener("focus", (e) => e.target.select());
       nameInput.addEventListener("blur", (e) => {
         if(e.target.value.trim() === "") {
           player.name = "Spieler";
           e.target.value = "Spieler";
+        } else {
+          player.name = e.target.value.trim();
+          e.target.value = player.name;
         }
+        nameInput.title = player.name;
         renderPodium();
       });
       head.appendChild(nameInput);
-
-      const editBtn = document.createElement("button");
-      editBtn.type = "button";
-      editBtn.className = "edit-card-btn" + (player.editing ? " active" : "");
-      editBtn.textContent = player.editing ? "Fertig" : "Bearbeiten";
-      editBtn.setAttribute("aria-pressed", player.editing ? "true" : "false");
-      editBtn.setAttribute("aria-label", player.editing
-        ? "Bearbeitung für " + player.name + " beenden"
-        : "Name von " + player.name + " bearbeiten");
-      editBtn.addEventListener("click", () => {
-        player.editing = !player.editing;
-        renderCards();
-        if(player.editing){
-          requestAnimationFrame(() => {
-            const cardNow = cardsGridEl.children[playerIndex];
-            const field = cardNow && cardNow.querySelector(".name-field");
-            if(field){ field.focus(); field.select(); }
-          });
-        }
-      });
-      head.appendChild(editBtn);
       card.appendChild(head);
 
       const total = document.createElement("div");
@@ -1048,11 +973,6 @@
         const isCurrentRound = r === roundCount - 1;
         const row = document.createElement("div");
         row.className = "round-row" + (isCurrentRound ? " current" : "");
-
-        const label = document.createElement("div");
-        label.className = "r-label";
-        label.textContent = "Runde " + (r+1);
-        row.appendChild(label);
 
         const input = document.createElement("input");
         input.type = "number";
@@ -1161,6 +1081,7 @@
 })();
 </script>
 
+
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
@@ -1174,6 +1095,6 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
-  
+
 </body>
 </html>
